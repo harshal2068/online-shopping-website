@@ -1,0 +1,31 @@
+
+.item{
+    display: flex;
+}
+.shop-container {
+    display: flex;
+    text-align: left;
+}
+
+.items-container{
+    width: 80%;
+    margin-left: 80px;
+    border-right: 1px solid lightgray;
+}
+
+.cart-container {
+    width: 20%;
+    margin-left: 20px;
+}
+
+.item-description{
+    display: flex;
+}
+
+.item-description div:first-child{
+    width: 25em;
+}
+
+.item ul {
+    font-size: 12px;
+}
