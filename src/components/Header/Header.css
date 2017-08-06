@@ -8,12 +8,14 @@
     text-align: left;
     height: 30px;
 }
+
 .header li{
     list-style: none;
     display: inline-block;
     margin-right: 10px;
 
 }
+
 .header li:hover {
     background-color: grey;
 }

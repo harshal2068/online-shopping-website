@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import logo from '../../images/logo.png'
 import './Header.css';
+
 class Header extends Component {
     render() {
         return (
             <div className="header">
-                <img src={logo} />
+                <img src={logo} alt="not found"/>
                 <ul>
                     <li>
                         <a href="/shop">Shop</a>

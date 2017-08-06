@@ -3,6 +3,9 @@ import './Shop.css';
 import ShopItem from '../ShopItem/ShopItem';
 import fakeData from '../../fakeData';
 import Cart from '../Cart/Cart';
+import {Link} from 'react-router-dom';
+import {addToDatabaseCart, getDatabaseCart} from '../../utilities/databaseManager';
+
 class Shop extends Component {
     constructor(props) {
         super(props);
@@ -15,26 +18,41 @@ class Shop extends Component {
     }
     
     componentDidMount() {
-        var first10 = fakeData.slice(0,10);
+        const first10 = fakeData.slice(0,10);
         this.setState({
             items: first10
         });
-        console.log(first10);
+
+        const cart = getDatabaseCart();
+        const keys = Object.keys(cart);
+        const items = keys.map(key => {
+            const item = fakeData.find(itm => itm.key === key);
+            item.quantity = cart[key];
+            return item;
+        });
+        this.setState({
+            cart: items
+        });
     }
 
     addToCart(key){
-        var selectedItem = this.state.items.find(item => item.key === key);
-        var newCart = [...this.state.cart];
+        const selectedItem = this.state.items.find(item => item.key === key);
+        const newCart = [...this.state.cart];
         newCart.push (selectedItem);
+
+        const newCartCount = Object.assign({}, this.state.cartCount);
+        const newCount = (newCartCount[key] || 0) + 1;
+        newCartCount[key] = newCount;
         this.setState({
-            cart: newCart
+            cart: newCart,
+            cartCount: newCartCount
         });
-        console.log(key);
+
+        addToDatabaseCart(key, newCount);
     }
     
     render() {
         return (
-
             <div className="shop-container">
                 <div className="items-container">
                     <h1>Shop these item</h1>
@@ -48,7 +66,13 @@ class Shop extends Component {
                 </div>
                 <div className="cart-container">
                     <h1>This is cart</h1>
-                    <Cart cart={this.state.cart}></Cart>
+                    <Cart cart={this.state.cart}>
+                        <Link to="/review">
+                            <button className="checkOutButton">
+                                Checkout
+                            </button>
+                        </Link>
+                    </Cart>
                 </div>
             </div>
         );

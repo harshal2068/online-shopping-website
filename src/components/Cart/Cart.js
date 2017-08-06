@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Cart.css';
-import {Link} from 'react-router-dom';
-class Cart extends Component {
+import { convertCurrency } from '../../utilities/convertCurrency';
 
+class Cart extends Component {
     constructor() {
         super();
         this.itemPrice = 0;
@@ -22,38 +22,34 @@ class Cart extends Component {
         this.totalBeforeTax = Math.round((this.itemPrice + this.shippingPrice) * 100) / 100;
         this.estmatedTax = Math.round(this.totalBeforeTax * 10) / 100;
         this.totalPrice = Math.round((this.totalBeforeTax + this.estmatedTax) * 100) / 100;
-        console.log(this.props.cart);
+
         return (
             <div>
                 <h3>Order Summary</h3>
                 <p>Items Ordered: {this.props.cart.length}</p>
-                
                 <div className="cartDescription">
                     <div className="title">Items</div>
-                    <div className="value">{this.itemPrice}</div>
+                    <div className="value">{convertCurrency.format(this.itemPrice)}</div>
                 </div>
                 <div className="cartDescription">
                     <div className="title">Shipping and Handling</div>
-                    <div className="value">{this.shippingPrice}</div>
+                    <div className="value">{convertCurrency.format(this.shippingPrice)}</div>
                 </div>
                 <div className="cartDescription">
                     <div className="title">Total before tax</div>
-                    <div className="value">{this.totalBeforeTax}</div>
+                    <div className="value">{convertCurrency.format(this.totalBeforeTax)}</div>
                 </div>
                 <div className="cartDescription">
                     <div className="title">Estimated tax</div>
-                    <div className="value">{this.estmatedTax}</div>
+                    <div className="value">{convertCurrency.format(this.estmatedTax)}</div>
                 </div>
-                <div className="">  
+                <div className="cartTotal">  
                     <div className="title">Order Total</div>
-                    <div className="value">{this.totalPrice}</div>
+                    <div className="value">{convertCurrency.format(this.totalPrice)}</div>
                 </div>
-                
-                <Link to="/review">
-                    <button>
-                        Checkout
-                    </button>
-                </Link>
+                <div>
+                    {this.props.children}
+                </div>
             </div>
         );
     }

@@ -1,0 +1,19 @@
+.review-container{
+    display: flex;
+}
+
+.item-container{
+    width: 50%;
+    margin-left: 200px;
+    border-right: 1px solid lightgray;
+}
+
+.button {
+    width: 47%;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.button:last-child {
+    margin-left: 5px;
+}

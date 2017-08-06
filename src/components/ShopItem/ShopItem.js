@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './ShopItem.css';
 import Rating from 'react-rating';
-import '../../../node_modules/font-awesome/css/font-awesome.css'
+import '../../../node_modules/font-awesome/css/font-awesome.css';
+
 class ShopItem extends Component {
     render() {
         return (
             <div className="item">
-                {/*<h1>This is shop item: {this.props.item.name}</h1>*/}
                 <div>
                     <img src={this.props.item.img} alt=""/>
                 </div>

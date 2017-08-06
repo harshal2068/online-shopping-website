@@ -1,7 +1,7 @@
-
 .item{
     display: flex;
 }
+
 .shop-container {
     display: flex;
     text-align: left;
@@ -28,4 +28,8 @@
 
 .item ul {
     font-size: 12px;
+}
+
+.checkOutButton{
+    margin-top: 12px;
 }
